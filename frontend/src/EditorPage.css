@@ -1,0 +1,50 @@
+.logo{
+    padding-bottom:10px;
+    margin:5px; 
+    width:30%;
+}
+.main {
+  display: flex;
+}
+.left_side{
+    max-width:25%;
+  
+}
+
+.connected_users {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.user_item {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background: #282a36;
+}
+.btn{
+    display: flex;
+    flex-direction: column;
+     justify-content: flex-end;
+  height: 80vh;
+  margin-left: 10px;
+    
+}
+.copy_roomid{
+    background-color: white;
+    padding: 10px;
+    width: 150px;
+    border-radius: 10px;
+   
+}
+.leave{
+     background-color: white;
+    padding: 10px;
+    width: 150px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
