@@ -150,6 +150,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get oTP(): Prisma.OTPDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    /**
+     * `prisma.reset_token`: Exposes CRUD operations for the **Reset_token** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Reset_tokens
+      * const reset_tokens = await prisma.reset_token.findMany()
+      * ```
+      */
+    get reset_token(): Prisma.Reset_tokenDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
 //# sourceMappingURL=class.d.ts.map

@@ -70,7 +70,8 @@ export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     User: 'User',
     RefreshToken: 'RefreshToken',
-    OTP: 'OTP'
+    OTP: 'OTP',
+    Reset_token: 'Reset_token'
 };
 /**
  * Enums
@@ -99,6 +100,13 @@ export const RefreshTokenScalarFieldEnum = {
 export const OTPScalarFieldEnum = {
     id: 'id',
     otp: 'otp',
+    userId: 'userId',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+};
+export const Reset_tokenScalarFieldEnum = {
+    id: 'id',
+    token: 'token',
     userId: 'userId',
     expiresAt: 'expiresAt',
     createdAt: 'createdAt'

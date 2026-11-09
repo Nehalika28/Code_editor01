@@ -36,4 +36,9 @@ export type RefreshToken = Prisma.RefreshTokenModel;
  *
  */
 export type OTP = Prisma.OTPModel;
+/**
+ * Model Reset_token
+ *
+ */
+export type Reset_token = Prisma.Reset_tokenModel;
 //# sourceMappingURL=client.d.ts.map
