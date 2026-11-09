@@ -21,6 +21,7 @@ model User {
   created_at    DateTime       @default(now()) @db.Timestamp(6)
   refreshTokens RefreshToken[]
   opt           OTP?
+  reset_token   Reset_token?
 }
 
 model RefreshToken {
@@ -39,4 +40,13 @@ model OTP {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Reset_token {
+  id          Int      @id @default(autoincrement())
+  token       String   @unique @db.VarChar(255) // Unique index is safer if you look up by token directly
+  userId      Int      @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
 }

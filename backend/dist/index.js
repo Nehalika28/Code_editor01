@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const ACCESS_TOKEN = "RANDOM";
 const REFRESH_TOKEN = "RANDOM";
+const RESET_TOKEN = "RANDOM";
 import cors from "cors";
 import "dotenv/config";
 import { PrismaClient } from "./generated/prisma/client.js";
@@ -209,6 +210,61 @@ app.post("/verify", async (req, res) => {
             message: "Logged in successfully",
             accesstoken,
             refreshtoken
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: "something went wrong"
+        });
+    }
+});
+app.post("/forget_password", async (req, res) => {
+    const email = req.body.email;
+    try {
+        if (!email) {
+            return res.status(400).json({
+                message: "email is required"
+            });
+        }
+        const user = await prisma.user.findUnique({
+            where: {
+                email: email
+            },
+        });
+        if (!user) {
+            return res.status(400).json({
+                message: "email enter is wrong"
+            });
+        }
+        const token = jwt.sign({ email }, RESET_TOKEN, { expiresIn: "10m" });
+        const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+        await prisma.reset_token.upsert({
+            where: { userId: user.id },
+            update: {
+                token: token,
+            },
+            create: {
+                userId: user.id,
+                token: token,
+                expiresAt,
+            },
+        });
+        const resetLink = `http://localhost:5173/reset_password?token=${token}`;
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: user.email,
+            subject: 'Reset Your Password',
+            text: `Hello ${user.username},
+
+Your reset password  for your code_editor accounf is: ${resetLink}
+
+If you did not try to reset password, please ignore this email.
+
+Thank you.`
+        });
+        return res.status(200).json({
+            message: "OTP sent successfully"
         });
     }
     catch (error) {

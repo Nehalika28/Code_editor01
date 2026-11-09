@@ -44,7 +44,7 @@ export default function login() {
                     <input type="email" placeholder="Enter email" value={email} onChange={(e) => { setEmail(e.target.value) }}></input>
                     <button className="sign" onClick={senddata}>Log in</button>
                     <p className="para"> Not have an account?<a href="#" onClick={(e) => { e.preventDefault(); navigate("/"); }}> Sign up</a></p>
-
+                     <p className="para"> Forget Password?<a href="#" onClick={(e) => { e.preventDefault(); navigate("/forget_password"); }}>Reset Password</a></p>
                 </div>
             </div>
         </div>

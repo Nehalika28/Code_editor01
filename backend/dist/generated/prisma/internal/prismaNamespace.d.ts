@@ -247,6 +247,7 @@ export declare const ModelName: {
     readonly User: 'User';
     readonly RefreshToken: 'RefreshToken';
     readonly OTP: 'OTP';
+    readonly Reset_token: 'Reset_token';
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export interface TypeMapCb<GlobalOmitOptions = {}> extends runtime.Types.Utils.Fn<{
@@ -259,7 +260,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "user" | "refreshToken" | "oTP";
+        modelProps: "user" | "refreshToken" | "oTP" | "reset_token";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -485,6 +486,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 };
             };
         };
+        Reset_token: {
+            payload: Prisma.$Reset_tokenPayload<ExtArgs>;
+            fields: Prisma.Reset_tokenFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.Reset_tokenFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.Reset_tokenFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                findFirst: {
+                    args: Prisma.Reset_tokenFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.Reset_tokenFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                findMany: {
+                    args: Prisma.Reset_tokenFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>[];
+                };
+                create: {
+                    args: Prisma.Reset_tokenCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                createMany: {
+                    args: Prisma.Reset_tokenCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.Reset_tokenCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>[];
+                };
+                delete: {
+                    args: Prisma.Reset_tokenDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                update: {
+                    args: Prisma.Reset_tokenUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.Reset_tokenDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.Reset_tokenUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.Reset_tokenUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>[];
+                };
+                upsert: {
+                    args: Prisma.Reset_tokenUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$Reset_tokenPayload>;
+                };
+                aggregate: {
+                    args: Prisma.Reset_tokenAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateReset_token>;
+                };
+                groupBy: {
+                    args: Prisma.Reset_tokenGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.Reset_tokenGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.Reset_tokenCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.Reset_tokenCountAggregateOutputType> | number;
+                };
+            };
+        };
     };
 } & {
     other: {
@@ -544,6 +619,14 @@ export declare const OTPScalarFieldEnum: {
     readonly createdAt: 'createdAt';
 };
 export type OTPScalarFieldEnum = (typeof OTPScalarFieldEnum)[keyof typeof OTPScalarFieldEnum];
+export declare const Reset_tokenScalarFieldEnum: {
+    readonly id: 'id';
+    readonly token: 'token';
+    readonly userId: 'userId';
+    readonly expiresAt: 'expiresAt';
+    readonly createdAt: 'createdAt';
+};
+export type Reset_tokenScalarFieldEnum = (typeof Reset_tokenScalarFieldEnum)[keyof typeof Reset_tokenScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: 'asc';
     readonly desc: 'desc';
@@ -739,6 +822,7 @@ export type GlobalOmitConfig = {
     user?: Prisma.UserOmit;
     refreshToken?: Prisma.RefreshTokenOmit;
     oTP?: Prisma.OTPOmit;
+    reset_token?: Prisma.Reset_tokenOmit;
 };
 export type LogLevel = 'info' | 'query' | 'warn' | 'error';
 export type LogDefinition = {

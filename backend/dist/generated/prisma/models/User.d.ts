@@ -178,6 +178,7 @@ export type UserWhereInput = {
     created_at?: Prisma.DateTimeFilter<"User"> | Date | string;
     refreshTokens?: Prisma.RefreshTokenListRelationFilter;
     opt?: Prisma.XOR<Prisma.OTPNullableScalarRelationFilter, Prisma.OTPWhereInput> | null;
+    reset_token?: Prisma.XOR<Prisma.Reset_tokenNullableScalarRelationFilter, Prisma.Reset_tokenWhereInput> | null;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -188,6 +189,7 @@ export type UserOrderByWithRelationInput = {
     created_at?: Prisma.SortOrder;
     refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput;
     opt?: Prisma.OTPOrderByWithRelationInput;
+    reset_token?: Prisma.Reset_tokenOrderByWithRelationInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -201,6 +203,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     created_at?: Prisma.DateTimeFilter<"User"> | Date | string;
     refreshTokens?: Prisma.RefreshTokenListRelationFilter;
     opt?: Prisma.XOR<Prisma.OTPNullableScalarRelationFilter, Prisma.OTPWhereInput> | null;
+    reset_token?: Prisma.XOR<Prisma.Reset_tokenNullableScalarRelationFilter, Prisma.Reset_tokenWhereInput> | null;
 }, "id" | "email">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -234,6 +237,7 @@ export type UserCreateInput = {
     created_at?: Date | string;
     refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
     opt?: Prisma.OTPCreateNestedOneWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenCreateNestedOneWithoutUserInput;
 };
 export type UserUncheckedCreateInput = {
     id?: number;
@@ -244,6 +248,7 @@ export type UserUncheckedCreateInput = {
     created_at?: Date | string;
     refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
     opt?: Prisma.OTPUncheckedCreateNestedOneWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenUncheckedCreateNestedOneWithoutUserInput;
 };
 export type UserUpdateInput = {
     email?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -253,6 +258,7 @@ export type UserUpdateInput = {
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
     opt?: Prisma.OTPUpdateOneWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUpdateOneWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -263,6 +269,7 @@ export type UserUncheckedUpdateInput = {
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
     opt?: Prisma.OTPUncheckedUpdateOneWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUncheckedUpdateOneWithoutUserNestedInput;
 };
 export type UserCreateManyInput = {
     id?: number;
@@ -358,6 +365,18 @@ export type UserUpdateOneRequiredWithoutOptNestedInput = {
     connect?: Prisma.UserWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOptInput, Prisma.UserUpdateWithoutOptInput>, Prisma.UserUncheckedUpdateWithoutOptInput>;
 };
+export type UserCreateNestedOneWithoutReset_tokenInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutReset_tokenInput, Prisma.UserUncheckedCreateWithoutReset_tokenInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutReset_tokenInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutReset_tokenNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutReset_tokenInput, Prisma.UserUncheckedCreateWithoutReset_tokenInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutReset_tokenInput;
+    upsert?: Prisma.UserUpsertWithoutReset_tokenInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReset_tokenInput, Prisma.UserUpdateWithoutReset_tokenInput>, Prisma.UserUncheckedUpdateWithoutReset_tokenInput>;
+};
 export type UserCreateWithoutRefreshTokensInput = {
     email: string;
     username: string;
@@ -365,6 +384,7 @@ export type UserCreateWithoutRefreshTokensInput = {
     color: string;
     created_at?: Date | string;
     opt?: Prisma.OTPCreateNestedOneWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenCreateNestedOneWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
     id?: number;
@@ -374,6 +394,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
     color: string;
     created_at?: Date | string;
     opt?: Prisma.OTPUncheckedCreateNestedOneWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenUncheckedCreateNestedOneWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -395,6 +416,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
     color?: Prisma.StringFieldUpdateOperationsInput | string;
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     opt?: Prisma.OTPUpdateOneWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUpdateOneWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -404,6 +426,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     color?: Prisma.StringFieldUpdateOperationsInput | string;
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     opt?: Prisma.OTPUncheckedUpdateOneWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUncheckedUpdateOneWithoutUserNestedInput;
 };
 export type UserCreateWithoutOptInput = {
     email: string;
@@ -412,6 +435,7 @@ export type UserCreateWithoutOptInput = {
     color: string;
     created_at?: Date | string;
     refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenCreateNestedOneWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutOptInput = {
     id?: number;
@@ -421,6 +445,7 @@ export type UserUncheckedCreateWithoutOptInput = {
     color: string;
     created_at?: Date | string;
     refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+    reset_token?: Prisma.Reset_tokenUncheckedCreateNestedOneWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutOptInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -442,6 +467,7 @@ export type UserUpdateWithoutOptInput = {
     color?: Prisma.StringFieldUpdateOperationsInput | string;
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUpdateOneWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutOptInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -451,6 +477,58 @@ export type UserUncheckedUpdateWithoutOptInput = {
     color?: Prisma.StringFieldUpdateOperationsInput | string;
     created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+    reset_token?: Prisma.Reset_tokenUncheckedUpdateOneWithoutUserNestedInput;
+};
+export type UserCreateWithoutReset_tokenInput = {
+    email: string;
+    username: string;
+    password: string;
+    color: string;
+    created_at?: Date | string;
+    refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+    opt?: Prisma.OTPCreateNestedOneWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutReset_tokenInput = {
+    id?: number;
+    email: string;
+    username: string;
+    password: string;
+    color: string;
+    created_at?: Date | string;
+    refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+    opt?: Prisma.OTPUncheckedCreateNestedOneWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutReset_tokenInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutReset_tokenInput, Prisma.UserUncheckedCreateWithoutReset_tokenInput>;
+};
+export type UserUpsertWithoutReset_tokenInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutReset_tokenInput, Prisma.UserUncheckedUpdateWithoutReset_tokenInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutReset_tokenInput, Prisma.UserUncheckedCreateWithoutReset_tokenInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutReset_tokenInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutReset_tokenInput, Prisma.UserUncheckedUpdateWithoutReset_tokenInput>;
+};
+export type UserUpdateWithoutReset_tokenInput = {
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    username?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    color?: Prisma.StringFieldUpdateOperationsInput | string;
+    created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+    opt?: Prisma.OTPUpdateOneWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutReset_tokenInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    username?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    color?: Prisma.StringFieldUpdateOperationsInput | string;
+    created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+    opt?: Prisma.OTPUncheckedUpdateOneWithoutUserNestedInput;
 };
 /**
  * Count Type UserCountOutputType
@@ -485,6 +563,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     created_at?: boolean;
     refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>;
     opt?: boolean | Prisma.User$optArgs<ExtArgs>;
+    reset_token?: boolean | Prisma.User$reset_tokenArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -515,6 +594,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>;
     opt?: boolean | Prisma.User$optArgs<ExtArgs>;
+    reset_token?: boolean | Prisma.User$reset_tokenArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -524,6 +604,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     objects: {
         refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[];
         opt: Prisma.$OTPPayload<ExtArgs> | null;
+        reset_token: Prisma.$Reset_tokenPayload<ExtArgs> | null;
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -863,6 +944,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
     readonly [Symbol.toStringTag]: "PrismaPromise";
     refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     opt<T extends Prisma.User$optArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$optArgs<ExtArgs>>): Prisma.Prisma__OTPClient<runtime.Types.Result.GetResult<Prisma.$OTPPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    reset_token<T extends Prisma.User$reset_tokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reset_tokenArgs<ExtArgs>>): Prisma.Prisma__Reset_tokenClient<runtime.Types.Result.GetResult<Prisma.$Reset_tokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1309,6 +1391,24 @@ export type User$optArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      */
     include?: Prisma.OTPInclude<ExtArgs> | null;
     where?: Prisma.OTPWhereInput;
+};
+/**
+ * User.reset_token
+ */
+export type User$reset_tokenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reset_token
+     */
+    select?: Prisma.Reset_tokenSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Reset_token
+     */
+    omit?: Prisma.Reset_tokenOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.Reset_tokenInclude<ExtArgs> | null;
+    where?: Prisma.Reset_tokenWhereInput;
 };
 /**
  * User without action

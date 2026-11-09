@@ -29,6 +29,7 @@ export declare const ModelName: {
     readonly User: 'User';
     readonly RefreshToken: 'RefreshToken';
     readonly OTP: 'OTP';
+    readonly Reset_token: 'Reset_token';
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -63,6 +64,14 @@ export declare const OTPScalarFieldEnum: {
     readonly createdAt: 'createdAt';
 };
 export type OTPScalarFieldEnum = (typeof OTPScalarFieldEnum)[keyof typeof OTPScalarFieldEnum];
+export declare const Reset_tokenScalarFieldEnum: {
+    readonly id: 'id';
+    readonly token: 'token';
+    readonly userId: 'userId';
+    readonly expiresAt: 'expiresAt';
+    readonly createdAt: 'createdAt';
+};
+export type Reset_tokenScalarFieldEnum = (typeof Reset_tokenScalarFieldEnum)[keyof typeof Reset_tokenScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: 'asc';
     readonly desc: 'desc';
