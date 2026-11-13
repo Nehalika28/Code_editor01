@@ -27,6 +27,7 @@ export declare const JsonNull: import("@prisma/client-runtime-utils").JsonNullCl
 export declare const AnyNull: import("@prisma/client-runtime-utils").AnyNullClass;
 export declare const ModelName: {
     readonly User: 'User';
+    readonly GoogleAccount: 'GoogleAccount';
     readonly RefreshToken: 'RefreshToken';
     readonly OTP: 'OTP';
     readonly Reset_token: 'Reset_token';
@@ -48,6 +49,14 @@ export declare const UserScalarFieldEnum: {
     readonly created_at: 'created_at';
 };
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
+export declare const GoogleAccountScalarFieldEnum: {
+    readonly id: 'id';
+    readonly googleId: 'googleId';
+    readonly email: 'email';
+    readonly userId: 'userId';
+    readonly createdAt: 'createdAt';
+};
+export type GoogleAccountScalarFieldEnum = (typeof GoogleAccountScalarFieldEnum)[keyof typeof GoogleAccountScalarFieldEnum];
 export declare const RefreshTokenScalarFieldEnum: {
     readonly id: 'id';
     readonly token: 'token';
@@ -82,4 +91,9 @@ export declare const QueryMode: {
     readonly insensitive: 'insensitive';
 };
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
+export declare const NullsOrder: {
+    readonly first: 'first';
+    readonly last: 'last';
+};
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
 //# sourceMappingURL=prismaNamespaceBrowser.d.ts.map

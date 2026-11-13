@@ -69,6 +69,7 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     User: 'User',
+    GoogleAccount: 'GoogleAccount',
     RefreshToken: 'RefreshToken',
     OTP: 'OTP',
     Reset_token: 'Reset_token'
@@ -89,6 +90,13 @@ export const UserScalarFieldEnum = {
     password: 'password',
     color: 'color',
     created_at: 'created_at'
+};
+export const GoogleAccountScalarFieldEnum = {
+    id: 'id',
+    googleId: 'googleId',
+    email: 'email',
+    userId: 'userId',
+    createdAt: 'createdAt'
 };
 export const RefreshTokenScalarFieldEnum = {
     id: 'id',
@@ -118,6 +126,10 @@ export const SortOrder = {
 export const QueryMode = {
     default: 'default',
     insensitive: 'insensitive'
+};
+export const NullsOrder = {
+    first: 'first',
+    last: 'last'
 };
 export const defineExtension = runtime.Extensions.defineExtension;
 //# sourceMappingURL=prismaNamespace.js.map

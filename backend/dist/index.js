@@ -1,5 +1,11 @@
 import express from "express";
 import crypto from "crypto";
+import { OAuth2Client } from "google-auth-library";
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+if (!GOOGLE_CLIENT_ID) {
+    throw new Error("GOOGLE_CLIENT_ID is missing in .env");
+}
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 const app = express();
 import nodemailer from "nodemailer";
 app.use(express.json());
@@ -90,6 +96,11 @@ app.post("/login", async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 message: "user not found"
+            });
+        }
+        if (!user.password) {
+            return res.status(401).json({
+                message: "This account uses Google Login. Please login with Google."
             });
         }
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -243,6 +254,7 @@ app.post("/forget_password", async (req, res) => {
             where: { userId: user.id },
             update: {
                 token: token,
+                expiresAt: expiresAt
             },
             create: {
                 userId: user.id,
@@ -271,6 +283,197 @@ Thank you.`
         console.log(error);
         res.status(400).json({
             message: "something went wrong"
+        });
+    }
+});
+app.post("/reset_password", async (req, res) => {
+    const token = req.query.token;
+    const new_password = req.body.new_password;
+    const confirm_password = req.body.confirm_password;
+    try {
+        if (!token || !new_password || !confirm_password) {
+            return res.status(400).json({
+                message: "All fields are required"
+            });
+        }
+        if (typeof token !== "string") {
+            return res.status(400).json({
+                message: "Valid token is required"
+            });
+        }
+        if (new_password !== confirm_password) {
+            return res.status(400).json({
+                message: "Passwords do not match"
+            });
+        }
+        const user = await prisma.reset_token.findUnique({
+            where: {
+                token: token
+            }
+        });
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid token"
+            });
+        }
+        if (new Date() > user.expiresAt) {
+            return res.status(400).json({
+                message: "Token expired"
+            });
+        }
+        const user01 = await prisma.user.findUnique({
+            where: {
+                id: user.userId
+            }
+        });
+        if (!user01) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        if (!user01.password) {
+            return res.status(400).json({
+                message: "Password is not set for this account. Please use Google login."
+            });
+        }
+        const isPasswordCorrect = await bcrypt.compare(new_password, user01.password);
+        if (isPasswordCorrect) {
+            return res.status(400).json({
+                message: "New password cannot be the same as old password"
+            });
+        }
+        const hashedPassword = await bcrypt.hash(new_password, 10);
+        await prisma.$transaction([
+            prisma.user.update({
+                where: {
+                    id: user01.id
+                },
+                data: {
+                    password: hashedPassword
+                }
+            }),
+            prisma.reset_token.delete({
+                where: {
+                    token: token
+                }
+            })
+        ]);
+        return res.status(200).json({
+            message: "Password reset successfully"
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Something went wrong"
+        });
+    }
+});
+app.post("/auth/google", async (req, res) => {
+    const { credential } = req.body;
+    try {
+        // Step 1: Check Google credential
+        if (!credential) {
+            return res.status(400).json({
+                message: "Google credential is required"
+            });
+        }
+        // Step 2: Verify Google ID token
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: GOOGLE_CLIENT_ID
+        });
+        // Step 3: Get Google user information
+        const payload = ticket.getPayload();
+        if (!payload || !payload.sub || !payload.email) {
+            return res.status(401).json({
+                message: "Google user information missing"
+            });
+        }
+        // Step 4: Verify Google email
+        if (payload.email_verified !== true) {
+            return res.status(401).json({
+                message: "Google email is not verified"
+            });
+        }
+        // Step 5: Extract user information
+        const googleId = payload.sub;
+        const email = payload.email;
+        const username = payload.name || email.split("@")[0] || "GoogleUser";
+        // Step 6: Find existing Google account
+        const existingGoogleAccount = await prisma.googleAccount.findUnique({
+            where: {
+                googleId: googleId
+            },
+            include: {
+                user: true
+            }
+        });
+        // Step 7: Find or create user
+        let user;
+        if (existingGoogleAccount) {
+            // Existing Google user
+            user = existingGoogleAccount.user;
+        }
+        else {
+            // Check whether email already exists
+            const existingUser = await prisma.user.findUnique({
+                where: {
+                    email: email
+                }
+            });
+            if (existingUser) {
+                return res.status(409).json({
+                    message: "Account already exists with this email. Please login using your existing account."
+                });
+            }
+            // Create new user
+            const newUser = await prisma.user.create({
+                data: {
+                    email: email,
+                    username: username,
+                    password: null,
+                    color: "#3498db"
+                }
+            });
+            // Create Google account
+            await prisma.googleAccount.create({
+                data: {
+                    googleId: googleId,
+                    email: email,
+                    userId: newUser.id
+                }
+            });
+            user = newUser;
+        }
+        // Step 8: Generate Access Token
+        const accesstoken = jwt.sign({ email: user.email }, ACCESS_TOKEN, { expiresIn: "15m" });
+        // Step 9: Generate Refresh Token
+        const refreshtoken = jwt.sign({ email: user.email }, REFRESH_TOKEN, { expiresIn: "7d" });
+        // Step 10: Store Refresh Token in Database
+        await prisma.refreshToken.create({
+            data: {
+                token: refreshtoken,
+                userId: user.id,
+                expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+            }
+        });
+        // Step 11: Send response
+        return res.status(200).json({
+            message: "Google authentication successful",
+            user: {
+                id: user.id,
+                email: user.email,
+                username: user.username
+            },
+            accesstoken,
+            refreshtoken
+        });
+    }
+    catch (error) {
+        console.error("GOOGLE AUTH ERROR:", error);
+        return res.status(401).json({
+            message: "Google authentication failed"
         });
     }
 });
