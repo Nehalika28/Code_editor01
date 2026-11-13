@@ -6,7 +6,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Otp from "./Otp";
 import Forget_Password from "./forget_Password";
-import Reset_Password  from './Reset_Password';
+import Reset_Password  from './Reset_password';
 
 export default function App() {
   return (
