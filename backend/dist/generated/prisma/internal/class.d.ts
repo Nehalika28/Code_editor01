@@ -129,6 +129,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     /**
+     * `prisma.googleAccount`: Exposes CRUD operations for the **GoogleAccount** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more GoogleAccounts
+      * const googleAccounts = await prisma.googleAccount.findMany()
+      * ```
+      */
+    get googleAccount(): Prisma.GoogleAccountDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
      * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
       * Example usage:
       * ```ts
